@@ -1,0 +1,12 @@
+{
+    "workbench.editor.customLabels.patterns": {
+        "**/.venv/**": "${filename}.${extname} - env",
+        "**/models/**": "${filename}.${extname} - models",
+        "**/tests/**": "${filename}.${extname} - tests",
+        "**/routes/methods/GET/**": "${filename}.${extname} - method GET",
+        "**/routes/methods/POST/**": "${filename}.${extname} - method POST",
+        "**/routes/methods/UPDATE/**": "${filename}.${extname} - method UPDATE",
+        "**/routes/methods/DELETE/**": "${filename}.${extname} - method DELETE",
+    },
+    "editor.formatOnSave": true,
+}
