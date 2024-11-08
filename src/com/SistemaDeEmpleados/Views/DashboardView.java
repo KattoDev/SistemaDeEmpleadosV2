@@ -11,9 +11,9 @@ import javax.swing.JLabel;
 /**
  * @author Kris
  */
-public class Dashboard extends javax.swing.JFrame {
+public class DashboardView extends javax.swing.JFrame {
 
-    public Dashboard() {
+    public DashboardView() {
 
         initComponents();
 
@@ -516,13 +516,13 @@ public class Dashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName())
+            java.util.logging.Logger.getLogger(DashboardView.class.getName())
                     .log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            Dashboard dashboard = new Dashboard();
+            DashboardView dashboard = new DashboardView();
 
             dashboard.setVisible(true);
 

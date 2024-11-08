@@ -339,6 +339,7 @@ public class LoginView extends javax.swing.JFrame {
                         login.btn_close);
                 
                 new LoginController(
+                        login,
                         login.txt_username,
                         login.txt_password,
                         login.loginContainer);
