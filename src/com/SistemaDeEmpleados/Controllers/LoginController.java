@@ -1,6 +1,8 @@
 package com.SistemaDeEmpleados.Controllers;
 
+import DEBUGING.Debug;
 import com.SistemaDeEmpleados.Models.User;
+import com.SistemaDeEmpleados.Models.ActualSession;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
@@ -16,21 +18,18 @@ public class LoginController {
             JTextField emailField,
             JTextField passwordField,
             JPanel loginButton) {
-        
+
         loginButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                User credentials = new User();
+                User credentials = new User(
+                        emailField.getText(), passwordField.getText());
 
-                credentials.setEmail(emailField.getText());
-                credentials.setPassword(passwordField.getText());
-                
-                if(!credentials.authUser()){
-                    System.err.println("DEBUG: NO AUTORIZADO");
-                }
-                else {
-                    System.err.println("DEBUG: AUTORIZADO");
-                    System.err.println(credentials.toString());
+                if (!credentials.authUser()) {
+                    new Debug("LOGIN NO AUTORIZADO");
+                } else {
+                    new Debug("LOGIN AUTORIZADO");
+                    new Debug(ActualSession.getInstance().getUser().toString());
                 }
             }
         });

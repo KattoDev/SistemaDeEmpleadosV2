@@ -11,13 +11,13 @@ public class User {
     private int id;
     private String name;
     private String address;
-    private String birthDay;
+    private String birthday;
     private Long phoneNumber;
     private String email;
     private String position;
     private Long salary;
     private String password;
-    private String department;
+    private int department;
     private Boolean isAdmin;
     // </editor-fold>
 
@@ -25,11 +25,19 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String address, String birthDay, Long phoneNumber, String email, String position, Long salary, String password, String department, Boolean isAdmin) {
+    public User(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
+    
+    public User(
+            int id, String name, String address, String birthday,
+            Long phoneNumber, String email, String position, Long salary,
+            String password, int department, Boolean isAdmin) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.birthDay = birthDay;
+        this.birthday = birthday;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.position = position;
@@ -65,12 +73,12 @@ public class User {
         this.address = address;
     }
 
-    public String getBirthDay() {
-        return birthDay;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public Long getPhoneNumber() {
@@ -113,11 +121,11 @@ public class User {
         this.password = password;
     }
 
-    public String getDepartment() {
+    public int getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(int department) {
         this.department = department;
     }
 
@@ -143,7 +151,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", address=" + address + ", birthDay=" + birthDay + ", phoneNumber=" + phoneNumber + ", email=" + email + ", position=" + position + ", salary=" + salary + ", password=" + password + ", department=" + department + ", isAdmin=" + isAdmin + '}';
+        return "User{" +
+                "id=" + id + ", name=" + name + ", address=" + address +
+                ", birthday=" + birthday + ", phoneNumber=" + phoneNumber +
+                ", email=" + email + ", position=" + position +
+                ", salary=" + salary + ", password=" + password +
+                ", department=" + department + ", isAdmin=" + isAdmin + '}';
     }
     // </editor-fold>
 }
