@@ -19,6 +19,16 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         new Icons().setLoginIcons(new JLabel[]{ico_user, ico_password, ico_citybg});
+
+        new WindowPositionController(this,
+                this.header,
+                this.btn_close);
+
+        new LoginController(
+                this,
+                this.txt_username,
+                this.txt_password,
+                this.loginContainer);
     }
 
     /**
@@ -317,32 +327,17 @@ public class LoginView extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 LoginView login = new LoginView();
 
                 login.setVisible(true);
-
-                new WindowPositionController(login,
-                        login.header,
-                        login.btn_close);
-                
-                new LoginController(
-                        login,
-                        login.txt_username,
-                        login.txt_password,
-                        login.loginContainer);
             }
         });
     }

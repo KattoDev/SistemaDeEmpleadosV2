@@ -2,6 +2,8 @@ package com.SistemaDeEmpleados.Controllers;
 
 import DEBUGING.Debug;
 import com.SistemaDeEmpleados.Models.ActualSession;
+import com.SistemaDeEmpleados.Views.EmployeeSearchModule;
+import com.SistemaDeEmpleados.Views.EmployeeProfileModule;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
@@ -13,6 +15,8 @@ import javax.swing.JPanel;
  */
 public class DashboardController {
 
+    private final ModuleController moduleController = new ModuleController();
+
     /**
      * Show the buttons if the user logged is admin
      *
@@ -23,16 +27,21 @@ public class DashboardController {
      */
     public void showButtons(JPanel employees,
             JPanel departments, JPanel employeeSearch,
-            JPanel employeeRegistration) {
+            JPanel employeeRegistration,
+            JPanel moduleContainer) {
 
         if (ActualSession.getInstance().getUser().getAdmin() == false) {
+            
+            // hide the admin buttons
             employees.setVisible(false);
             departments.setVisible(false);
             employeeSearch.setVisible(false);
             employeeRegistration.setVisible(false);
-//          TODO
-//            ContentHandle.Panel.Show(displaycontent, CM_Views.EmployeeProfileModule.EmployeeProfile(),
-//                    contentWidth, contentHeight);
+            
+            // redirect to profile
+            new ModuleController().insertModule(
+                    moduleContainer,
+                    new EmployeeProfileModule());
         } else {
             // TODO 
 //            ContentHandle.Panel.Show(displaycontent, CM_Views.EmployeesModule.FindEmployee(), contentWidth,
@@ -50,9 +59,8 @@ public class DashboardController {
      * @param employeeRegistrationModulebtn
      * @param departmentsbtn
      * @param reportsbtn
-     * @param employeeSearchbtn
-     * @param employeeRegistrationbtn
      * @param projectsbtn
+     * @param moduleContainer
      * @param logoutbtn
      * @param profilebtn
      */
@@ -64,7 +72,8 @@ public class DashboardController {
             JPanel reportsbtn,
             JPanel projectsbtn,
             JPanel profilebtn,
-            JPanel logoutbtn
+            JPanel logoutbtn,
+            JPanel moduleContainer
     ) {
 
         /**
@@ -75,9 +84,11 @@ public class DashboardController {
         employeesbtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                new Debug("clicked");
                 // TODO Handle the employees submodule
-//                ContentHandle.Panel.Show(displaycontent, CM_Views.EmployeesModule.FindEmployee(), contentWidth,
-//                        contentHeight);
+                moduleController.insertModule(
+                        moduleContainer,
+                        new EmployeeSearchModule());
                 employeeRegistrationModulebtn.setVisible(true);
                 employeeSearchModulebtn.setVisible(true);
             }
@@ -151,7 +162,9 @@ public class DashboardController {
         profilebtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                // TODO make the handle of the submodule
+                new ModuleController().insertModule(
+                        moduleContainer,
+                        new EmployeeProfileModule());
             }
         });
 
@@ -188,7 +201,7 @@ public class DashboardController {
                     case 1 -> {
                         if (ActualSession.getInstance().getUser().logOut()) {
                             System.exit(0);
-                            new Debug("Se cerró sesión");
+                            
                         }
                     }
                 }

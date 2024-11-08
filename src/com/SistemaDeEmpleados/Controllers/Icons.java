@@ -2,6 +2,8 @@ package com.SistemaDeEmpleados.Controllers;
 
 import javax.swing.*;
 import DEBUGING.Debug;
+import com.SistemaDeEmpleados.Views.DashboardView;
+import com.SistemaDeEmpleados.Views.LoginView;
 
 /**
  * @author katto
@@ -9,12 +11,9 @@ import DEBUGING.Debug;
 public class Icons {
 
     /**
-     * Sets the icons for login user, login password and the login background
+     * Sets the icons for {@link LoginView}
      *
-     * @param labels array of the icons JLabels of the login:
-     * user
-     * password
-     * cityBg
+     * @param labels array of the icons JLabels of the login
      * @throws IllegalArgumentException when the array doesn't contain 3
      * elements
      */
@@ -37,6 +36,12 @@ public class Icons {
         new Debug("iconos del login aplicados");
     }
 
+    /**
+     * Sets the icons for {@link DashboardView}
+     * @param labels array of the icons JLabels of the DashboardView
+     * @throws IllegalArgumentException when the array doesn't contain 7
+     * elements
+     */
     public void setDashboardIcons(JLabel[] labels) throws IllegalArgumentException {
         
         if(labels.length != 7){

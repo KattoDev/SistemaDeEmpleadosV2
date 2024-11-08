@@ -1,5 +1,6 @@
 package com.SistemaDeEmpleados.Views;
 
+import DEBUGING.Debug;
 import com.SistemaDeEmpleados.Controllers.AppColors;
 import com.SistemaDeEmpleados.Controllers.DashboardController;
 import com.SistemaDeEmpleados.Controllers.Icons;
@@ -20,7 +21,7 @@ public class DashboardView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         new DashboardController().showButtons(btn_employees, btn_departments,
-                btn_employeeSearch, btn_employeeRegistration);
+                btn_employeeSearch, btn_employeeRegistration, displaycontent);
 
         new Icons().setDashboardIcons(new JLabel[]{
             icon_employeeRegistration,
@@ -31,6 +32,21 @@ public class DashboardView extends javax.swing.JFrame {
             icon_projects,
             icon_profile});
 
+        new WindowPositionController(
+                this,
+                header,
+                btn_close);
+
+        new DashboardController().buttonsEventListener(
+                btn_employees,
+                btn_employeeSearch,
+                btn_employeeRegistration,
+                btn_departments,
+                btn_reports,
+                btn_projects,
+                btn_profile,
+                btn_logout,
+                displaycontent);
     }
 
     /**
@@ -522,24 +538,7 @@ public class DashboardView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            DashboardView dashboard = new DashboardView();
-
-            dashboard.setVisible(true);
-
-            new WindowPositionController(
-                    dashboard,
-                    dashboard.header,
-                    dashboard.btn_close);
-
-            new DashboardController().buttonsEventListener(
-                    dashboard.btn_employees,
-                    dashboard.btn_employeeSearch,
-                    dashboard.btn_employeeRegistration,
-                    dashboard.btn_departments,
-                    dashboard.btn_reports,
-                    dashboard.btn_projects,
-                    dashboard.btn_profile,
-                    dashboard.btn_logout);
+            new DashboardView().setVisible(true);
         });
     }
 
