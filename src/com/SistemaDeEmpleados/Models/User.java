@@ -1,6 +1,7 @@
 package com.SistemaDeEmpleados.Models;
 
 import com.SistemaDeEmpleados.Controllers.Auth;
+import javax.swing.JOptionPane;
 
 /**
  * @author katto
@@ -146,6 +147,9 @@ public class User {
 
     public boolean logOut() {
         ActualSession.getInstance().destroyInstance();
+        JOptionPane.showMessageDialog(
+                null, "Se ha cerrado la sesión con exito.", "Aviso",
+                JOptionPane.OK_OPTION);
         return true;
     }
 
