@@ -22,7 +22,21 @@ def get_user(user_id):
     if not user:
         return jsonify({"mensaje": "usuario no encontrado"}), 404
 
-    return jsonify(user.to_dict())
+    return jsonify([user.to_dict()]), 200
+
+
+@user_bp.route("/<email>-<password>", methods=["GET"])
+def search_user_by_email_and_password(email, password):
+    user = (
+        db.session.query(userModel.Users)
+        .filter(userModel.Users.email == email, userModel.Users.password == password)
+        .first()
+    )
+
+    if user:
+        return jsonify([user.to_dict()]), 200
+    else:
+        return jsonify({"mensaje": "usuario no encontrado"}), 404
 
 
 # ------------------------------------------------------------------------------
