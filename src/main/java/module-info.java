@@ -4,6 +4,8 @@ module com.tadsonoc.sistemaempleados {
 
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.tadsonoc.sistemaempleados to javafx.fxml;
-    exports com.tadsonoc.sistemaempleados;
+    exports com.tadsonoc.sistemaempleados.Controllers;
+    opens com.tadsonoc.sistemaempleados.Controllers to javafx.fxml;
+    exports com.tadsonoc.sistemaempleados.Apps;
+    opens com.tadsonoc.sistemaempleados.Apps to javafx.fxml;
 }
