@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DEBUGING;
+package DebugHandler;
 
 /**
- *
  * @author katto
  */
 public class Debug {
@@ -18,9 +17,9 @@ public class Debug {
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String ANSI_RESET = "\u001B[0m";
-    
-    public Debug(String message){
+
+    public Debug(String message) {
         System.out.println(ANSI_YELLOW + "DEBUG: " + ANSI_PURPLE + message + ANSI_PURPLE);
     }
-    
+
 }

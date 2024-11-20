@@ -2,6 +2,7 @@ package com.tadsonoc.sistemaempleados.Models;
 
 /**
  * Singleton class for app session
+ *
  * @author katto
  */
 public class ActualSession {
@@ -22,12 +23,13 @@ public class ActualSession {
     /**
      * Destroys the actual instance in app
      */
-    public void destroyInstance(){
+    public void destroyInstance() {
         instance = null;
     }
 
     /**
      * Sets the user in the session instance
+     *
      * @param user instance of {@link com.tadsonoc.sistemaempleados.Models.User}
      */
     public void setUser(User user) {
@@ -37,5 +39,5 @@ public class ActualSession {
     public User getUser() {
         return user;
     }
-    
+
 }

@@ -1,5 +1,6 @@
 package com.tadsonoc.sistemaempleados.Controllers;
 
+import com.tadsonoc.sistemaempleados.Models.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -14,8 +15,25 @@ public class Login {
 
     @FXML
     protected void LoginButtonClick() {
-        if (!("admin").equals(user_field.getText()) && !("admin").equals(password_field.getText())) {
-            Alerts.showAlert(Alert.AlertType.INFORMATION, "Titulo de la alerta", "cuerpo de la alerta");
+
+        if (!user_field.getText().isEmpty() && !password_field.getText().isEmpty()) {
+
+            User user = new User(user_field.getText(), user_field.getText());
+
+            if (!user.Login()) {
+                Alerts.showAlert(
+                        Alert.AlertType.ERROR,
+                        null,
+                        "Usuario o contraseña incorrectos");
+            } else {
+                Alerts.showAlert(Alert.AlertType.INFORMATION, null, "auth");
+            }
+
+        } else {
+            Alerts.showAlert(
+                    Alert.AlertType.WARNING,
+                    null,
+                    "Por favor rellene todos los campos");
         }
     }
 }

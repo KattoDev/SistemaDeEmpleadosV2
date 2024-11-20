@@ -1,6 +1,9 @@
 package com.tadsonoc.sistemaempleados.Models;
 
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.tadsonoc.sistemaempleados.Controllers.APIClient;
 import com.tadsonoc.sistemaempleados.Controllers.Alerts;
 import javafx.scene.control.Alert;
 
@@ -135,12 +138,39 @@ public class User {
         isAdmin = admin;
     }
     // </editor-fold>
+
+    public boolean Login() {
+
+        JsonArray jsonArray = new APIClient().fetch("users/" + getEmail() + "-" + getPassword());
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+
+        if (!(jsonObject.has("error")) && !(jsonObject.has("message"))) {
+            User authUser = new User(
+                    jsonObject.get("id").getAsInt(),
+                    jsonObject.get("name").getAsString(),
+                    jsonObject.get("address").getAsString(),
+                    jsonObject.get("birthday").getAsString(),
+                    jsonObject.get("phoneNumber").getAsLong(),
+                    getEmail(),
+                    jsonObject.get("position").getAsString(),
+                    jsonObject.get("salary").getAsLong(),
+                    getPassword(),
+                    jsonObject.get("department").getAsInt(),
+                    jsonObject.get("isAdmin").getAsBoolean()
+            );
+            ActualSession.getInstance().setUser(authUser);
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Logs out the actual user of the app destroying the {@link ActualSession}
      *
      * @return true if the user is logged out the app
      */
-    public boolean logOut() {
+    public boolean LogOut() {
         ActualSession.getInstance().destroyInstance();
         Alerts.showAlert(Alert.AlertType.CONFIRMATION, "Aviso", "Se ha cerrado la sesión con exito");
         return true;
