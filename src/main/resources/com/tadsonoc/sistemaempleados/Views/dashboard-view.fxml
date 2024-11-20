@@ -1,20 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane prefHeight="800.0" prefWidth="262.0">
-         <children>
-            <Button layoutX="60.0" layoutY="103.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="147.0" text="Boton 1" />
-            <Button layoutX="60.0" layoutY="177.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="147.0" text="Boton 2" />
-            <Button layoutX="60.0" layoutY="252.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="147.0" text="Boton 3" />
-            <Button layoutX="60.0" layoutY="326.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="147.0" text="Boton 4" />
-            <Button layoutX="60.0" layoutY="400.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="147.0" text="Boton 5" />
-            <Button layoutX="60.0" layoutY="475.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="147.0" text="Boton 6" />
-            <Button layoutX="80.0" layoutY="737.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="108.0" text="Cerrar sesion" />
-         </children></Pane>
-      <Pane layoutX="257.0" opacity="0.36" prefHeight="800.0" prefWidth="1023.0" />
-   </children>
+    <children>
+        <Pane prefHeight="698.0" prefWidth="262.0">
+            <children>
+                <Pane layoutX="51.0" layoutY="78.0" prefHeight="47.0" prefWidth="161.0" styleClass="buttons" stylesheets="@../Css/Dashboard.css">
+                    <children>
+                        <Label layoutX="60.0" layoutY="8.0" prefHeight="32.0" prefWidth="85.0" text="Empleados" />
+                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../Icons/user.png" />
+                     </image></ImageView>
+                    </children>
+                </Pane>
+            <Pane layoutX="51.0" layoutY="135.0" prefHeight="47.0" prefWidth="161.0" styleClass="buttons" stylesheets="@../Css/Dashboard.css">
+               <children>
+                  <Label layoutX="60.0" layoutY="8.0" prefHeight="32.0" prefWidth="98.0" text="Departamentos" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../Icons/build.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="51.0" layoutY="192.0" prefHeight="47.0" prefWidth="161.0" styleClass="buttons" stylesheets="@../Css/Dashboard.css">
+               <children>
+                  <Label layoutX="60.0" layoutY="8.0" prefHeight="32.0" prefWidth="56.0" text="Reportes" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../Icons/report.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="51.0" layoutY="249.0" prefHeight="47.0" prefWidth="161.0" styleClass="buttons" stylesheets="@../Css/Dashboard.css">
+               <children>
+                  <Label layoutX="60.0" layoutY="8.0" prefHeight="32.0" prefWidth="78.0" text="Proyectos" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../Icons/task.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="51.0" layoutY="306.0" prefHeight="47.0" prefWidth="161.0" styleClass="buttons" stylesheets="@../Css/Dashboard.css">
+               <children>
+                  <Label layoutX="60.0" layoutY="8.0" prefHeight="32.0" prefWidth="56.0" text="Perfil" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../Icons/profile.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="51.0" layoutY="612.0" prefHeight="47.0" prefWidth="161.0" styleClass="buttons" stylesheets="@../Css/Dashboard.css">
+               <children>
+                  <Label layoutX="38.0" layoutY="11.0" prefHeight="25.0" prefWidth="85.0" text="Cerrar sesion" />
+               </children>
+            </Pane>
+            </children>
+        </Pane>
+        <Pane layoutX="257.0" opacity="0.36" prefHeight="698.0" prefWidth="1023.0" />
+    </children>
 </Pane>
