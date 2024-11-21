@@ -1,5 +1,7 @@
 package com.tadsonoc.sistemaempleados.Apps;
 
+import DebugHandler.Debug;
+import com.tadsonoc.sistemaempleados.Models.ActualSession;
 import com.tadsonoc.sistemaempleados.Models.WindowSize;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,5 +26,6 @@ public class Dashboard extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        new Debug(ActualSession.getInstance().getUser().toString());
     }
 }
