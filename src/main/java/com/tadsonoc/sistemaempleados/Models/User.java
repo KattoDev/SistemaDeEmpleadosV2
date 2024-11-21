@@ -3,9 +3,13 @@ package com.tadsonoc.sistemaempleados.Models;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.tadsonoc.sistemaempleados.Controllers.APIClient;
 import com.tadsonoc.sistemaempleados.Controllers.Alerts;
 import javafx.scene.control.Alert;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * @author katto
@@ -139,12 +143,12 @@ public class User {
     }
     // </editor-fold>
 
-    public boolean Login() {
+    public boolean Login() throws IOException, URISyntaxException {
 
-        JsonArray jsonArray = new APIClient().fetch("users/" + getEmail() + "-" + getPassword());
+        JsonArray jsonArray = new APIClient().MethodGET("users/" + getEmail() + "-" + getPassword());
         JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
 
-        if (!(jsonObject.has("error")) && !(jsonObject.has("message"))) {
+        if (!(jsonObject.has("error"))) {
             User authUser = new User(
                     jsonObject.get("id").getAsInt(),
                     jsonObject.get("name").getAsString(),
@@ -192,4 +196,23 @@ public class User {
                 ", isAdmin=" + isAdmin +
                 '}';
     }
+
+    public JsonArray getAsJSONArray() {
+        String jsonString = "[{" +
+                "\"name\": \"" + getName() + "\"," +
+                "\"address\": \"" + getAddress() + "\"," +
+                "\"birthday\": \"" + getBirthday() + "\"," +
+                "\"phoneNumber\": \"" + getPhoneNumber() + "\"," +
+                "\"email\": \"" + getEmail() + "\"," +
+                "\"position\": \"" + getPosition() + "\"," +
+                "\"salary\": " + getSalary() + "," +
+                "\"password\": \"" + getPassword() + "\"," +
+                "\"department\": \"" + getDepartment() + "\"," +
+                "\"isAdmin\": " + getAdmin() +
+                "}]";
+        
+        return JsonParser.parseString(jsonString).getAsJsonArray();
+    }
 }
+
+
