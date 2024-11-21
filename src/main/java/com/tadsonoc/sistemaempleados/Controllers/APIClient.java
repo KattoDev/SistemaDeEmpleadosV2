@@ -9,73 +9,98 @@ import com.tadsonoc.sistemaempleados.Models.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class APIClient {
 
-    private final String BASE_URL = "http://localhost:5000/api/";
+    private final String api = "http://127.0.0.1:5000/api/";
 
     /**
-     * fetch a resource from the API
+     * Gets a resouce within API
      *
-     * @param resource the API resource to fetch
+     * @param resource the resource that is fetched
+     * @return a JSONArray with the response
+     * @throws IOException        when connection isn't stablished.
+     * @throws URISyntaxException if the url isn't correct.
      */
-    public JsonArray fetch(String resource) {
-        JsonArray json;
+    public JsonArray MethodGET(String resource) throws IOException, URISyntaxException {
+        URL url = new URI(api + resource).toURL();
 
-        try {
-            // API URL
-            URL url = new URI(BASE_URL + resource).toURL();
-
-            // make connection
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            // HTTP method
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
-
-            // change the response (String -> JSON) with GSON
-            json = new Gson().fromJson(getString(conn), JsonArray.class);
-
-            // print as JSON
-            // new Debug("output as JSON: " + json);
-            conn.disconnect();
-
-            return json;
-
-        } catch (Exception e) {
-            new Debug("RE | " + e);
-            JsonArray error = new JsonArray();
-            String errorString = "[{\"error\":\"" + e.getMessage() + "\"}]";
-            error.addAll(JsonParser.parseString(errorString).getAsJsonArray());
-            return error;
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        if (conn.getResponseCode() != 200) {
+            return JsonParser.parseString("[{\"error\": \"" + conn.getResponseCode() + "\"}]").getAsJsonArray();
         }
 
+        new Debug("GET OK");
+        return new Gson().fromJson(getString(conn), JsonArray.class);
     }
 
     /**
-     * Upload a JSON with PATCH method
+     * Posts a user to the API
      *
-     * @param <Type>   {@link User}
-     * @param resource the URL to patch
-     * @param patch    the JSONArray Object to patch
-     * @return true if patched successfully
-     * @throws RuntimeException if an error happens
+     * @param user the user to upload
+     * @throws IOException
+     * @throws URISyntaxException
      */
-    public <Type> boolean patch(String resource, Type patch) throws RuntimeException {
+    public void methodPOST(User user) throws IOException, URISyntaxException {
+        HttpURLConnection conn = getHttpURLConnection(user);
 
-        return true;
+        if (conn.getResponseCode() != 200) {
+            System.out.println("POST REQUEST NOT OK");
+        } else {
+            try (
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+
+                String inputLine;
+
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                System.out.println(response);
+            }
+        }
     }
 
     /**
-     * Gets the API response
-     *
-     * @param conn the connection HTTP with the API
-     * @return the API response
-     * @throws IOException      when an error ocurss while reading the response
-     * @throws RuntimeException if the response isn't HTTP 200
+     * @param user
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    private HttpURLConnection getHttpURLConnection(User user) throws URISyntaxException, IOException {
+        URL url = new URI(api + "users/").toURL();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json; utf-8");
+
+        // FOR POST ONLY - START
+        conn.setDoOutput(true);
+        try (OutputStream os = conn.getOutputStream()) {
+            JsonArray sendInfo = user.getAsJSONArray();
+            byte[] input = sendInfo.toString().getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+            os.flush();
+        }
+        // FOR POST ONLY - END
+
+        return conn;
+    }
+
+    /**
+     * @param conn
+     * @return
+     * @throws IOException
+     * @throws RuntimeException
      */
     private static String getString(HttpURLConnection conn) throws IOException, RuntimeException {
         if (conn.getResponseCode() != 200) {
